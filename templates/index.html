@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Bugs, Bugs, Bugs</h1>
+  <h2>Welcome {{ user }}!</h2>
+  <h3></h3>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+    {% if request.user.is_authenticated %}
+      <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+      <li class="nav-item justify-content-end"><a class="nav-link" href="/submit/">Submit Ticket</a></li>
+    {% else %}
+      <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+    {% endif %}
+  </ul>
+  <div class="container">
+    <div class="card">
+        <h5 class="card-header">NEW</h5>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title: </th>
+                        <th scope="col">Filed By: </th>
+                        <th scope="col">Assigned To: </th>
+                        <th scope="col">Reported By: </th>
+                        <th scope="col">Ticket: </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in new_ticket %}
+                    <tr>
+                        <th scope="row">{{ticket.id}}</th>
+                        <td><a href="/ticket/{{ticket.id}}" class="card-link">{{ ticket.title }}</a></td>
+                        <td><a href="/ticket/{{ticket.filed_by}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td><a href="/user/{{ticket.assigned_to}}" class="card-link">{{ ticket.assigned_to }}</a></td>
+                        <td><a href="/user/{{ticket.filed_by.username}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td>{{ ticket.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header">IN PROGRESS</h5>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title: </th>
+                        <th scope="col">Filed By: </th>
+                        <th scope="col">Assigned To: </th>
+                        <th scope="col">Reported By: </th>
+                        <th scope="col">Ticket: </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in progress_tickets %}
+                    <tr>
+                        <th scope="row">{{ticket.id}}</th>
+                        <td><a href="/ticket/{{ticket.id}}" class="card-link">{{ ticket.title }}</a></td>
+                        <td><a href="/ticket/{{ticket.filed_by}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td><a href="/user/{{ticket.assigned_to}}" class="card-link">{{ ticket.assigned_to }}</a></td>
+                        <td><a href="/user/{{ticket.filed_by.username}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td>{{ ticket.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header">DONE</h5>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title: </th>
+                        <th scope="col">Filed By: </th>
+                        <th scope="col">Assigned To: </th>
+                        <th scope="col">Reported By: </th>
+                        <th scope="col">Ticket: </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in done_tickets %}
+                    <tr>
+                        <th scope="row">{{ticket.id}}</th>
+                        <td><a href="/ticket/{{ticket.id}}" class="card-link">{{ ticket.title }}</a></td>
+                        <td><a href="/ticket/{{ticket.filed_by}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td><a href="/user/{{ticket.assigned_to}}" class="card-link">{{ ticket.assigned_to }}</a></td>
+                        <td><a href="/user/{{ticket.filed_by.username}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td>{{ ticket.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <h5 class="card-header">INVALID</h5>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title: </th>
+                        <th scope="col">Filed By: </th>
+                        <th scope="col">Assigned To: </th>
+                        <th scope="col">Reported By: </th>
+                        <th scope="col">Ticket: </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in invalid_tickets %}
+                    <tr>
+                        <th scope="row">{{ticket.id}}</th>
+                        <td><a href="/ticket/{{ticket.id}}" class="card-link">{{ ticket.title }}</a></td>
+                        <td><a href="/ticket/{{ticket.filed_by}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td><a href="/user/{{ticket.assigned_to}}" class="card-link">{{ ticket.assigned_to }}</a></td>
+                        <td><a href="/user/{{ticket.filed_by.username}}" class="card-link">{{ ticket.filed_by }}</a></td>
+                        <td>{{ ticket.date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
